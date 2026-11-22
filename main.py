@@ -15,6 +15,10 @@ TEXT = (
 
 
 def main() -> None:
+    # The gate is 1-280 Unicode code points; fail loudly instead of
+    # ever submitting a text the judge will not see.
+    if not 1 <= len(TEXT) <= 280:
+        raise ValueError(f"entry text is {len(TEXT)} characters, must be 1-280")
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(TEXT)
